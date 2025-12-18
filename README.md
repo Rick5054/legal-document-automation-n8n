@@ -1,12 +1,12 @@
 # Automated Legal Document Summary Workflow (n8n)
 
-Research-driven automation workflow that ingests legal documents from email, extracts structured insights using LLMs, and distributes results via Google Sheets and email.
+Research-driven automation system that ingests legal documents from email, extracts structured insights using LLMs, and distributes results via Google Sheets and email.
 
 ---
 
 ## 🔍 Overview
 This project implements an **end-to-end document intelligence pipeline** using **n8n**.  
-It automatically processes incoming legal documents (complaints, contracts, filings), extracts structured summaries and key risk points using an LLM, and stores the results for operational and analytical use.
+It automatically processes incoming legal documents (complaints, contracts, filings), extracts concise summaries and key legal risk points using an LLM, and stores the results for operational tracking and downstream analysis.
 
 The workflow is designed to be:
 - reproducible
@@ -23,48 +23,48 @@ The workflow is designed to be:
 
 ---
 
-## 🧠 What the workflow does (step-by-step)
+## 🧠 Workflow Logic (Step-by-Step)
 
 1. **Gmail Trigger**
-   - Monitors inbox for emails with attachments
-   - Filters by keywords (Complaint, Contract, Filename)
+   - Monitors inbox for emails with attachments  
+   - Filters messages using legal document keywords (e.g., Complaint, Contract)
 
 2. **Google Drive Upload**
-   - Saves attachments to a structured Drive folder
-   - Maintains document traceability
+   - Stores incoming documents in a structured Drive folder  
+   - Ensures traceability and centralized storage
 
 3. **Document Download**
-   - Fetches stored file for processing
+   - Retrieves the stored file for processing
 
 4. **PDF Text Extraction**
-   - Extracts raw text from legal PDFs
+   - Extracts raw text from legal PDF documents
 
 5. **LLM Processing (OpenAI via n8n)**
-   - Generates:
-     - concise factual summary (~200 words)
-     - top 5 legal risk/issues
-     - computed procedural deadline
-     - structured JSON output (schema-enforced)
+   - Produces:
+     - a concise ~200-word factual summary
+     - top five legal issues / risk points
+     - a computed procedural deadline
+     - a strictly validated JSON output (schema-enforced)
 
 6. **Google Sheets Logging**
-   - Appends structured results into a tracking sheet
-   - Enables downstream analytics and dashboards
+   - Appends structured outputs to a tracking sheet  
+   - Enables auditing, review, and analytics
 
 7. **Email Notification**
-   - Sends internal summary email with key findings
+   - Sends an internal summary email with key findings
 
 ---
 
 ## 📦 Output Schema (LLM)
 
-The model returns a **strict JSON object**:
+The workflow enforces a **strict JSON schema** to guarantee predictable downstream automation:
 
 ```json
 {
   "RawID": "string",
   "DateReceived": "YYYY-MM-DD",
   "Summary": "string",
-  "KeyIssues": ["Issue1","Issue2","Issue3","Issue4","Issue5"],
+  "KeyIssues": ["Issue1", "Issue2", "Issue3", "Issue4", "Issue5"],
   "Deadline": "YYYY-MM-DD",
   "DeadlineAssumption": "string",
   "EmailSubject": "string",
