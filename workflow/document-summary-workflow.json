@@ -1,1 +1,533 @@
-
+{
+  "name": "Work Flow",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "Document Summery",
+        "height": 256,
+        "width": 1808,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1568,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "bdfcaa83-dc6a-428b-aba0-e0c15abbe26b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "has:attachment AND (Complaint OR Contract OR Filename)"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        1664,
+        528
+      ],
+      "id": "5e694c24-af83-46e4-a514-5cb175018ff4",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rpRLONudmGiSa18l",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "attachment_0",
+        "name": "={{ $json.subject }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1FMSsZls5hkA4zEjYlW9zPkyDFF9GBrB_",
+          "mode": "list",
+          "cachedResultName": "Complaints & Contracts ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1FMSsZls5hkA4zEjYlW9zPkyDFF9GBrB_"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1888,
+        528
+      ],
+      "id": "6516c478-3ee7-4d35-ad0d-9c6fd4c9ce28",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "XnJY1DXBZnFIWODa",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2096,
+        528
+      ],
+      "id": "cdeea74e-aad2-45dc-84d7-30c10dc79875",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "XnJY1DXBZnFIWODa",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        528
+      ],
+      "id": "a34e54dc-9c50-4f32-9c01-ad6c0ce69993",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "content": "Document Summery",
+        "height": 272,
+        "width": 1440
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1488,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "bdfcaa83-dc6a-428b-aba0-e0c15abbe26b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "has:attachment AND (Complaint OR Contract OR Filename)"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        1600,
+        496
+      ],
+      "id": "5e694c24-af83-46e4-a514-5cb175018ff4",
+      "name": "Gmail Trigger1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rpRLONudmGiSa18l",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "attachment_0",
+        "name": "={{ $json.subject }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1FMSsZls5hkA4zEjYlW9zPkyDFF9GBrB_",
+          "mode": "list",
+          "cachedResultName": "Complaints & Contracts ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1FMSsZls5hkA4zEjYlW9zPkyDFF9GBrB_"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1824,
+        496
+      ],
+      "id": "6516c478-3ee7-4d35-ad0d-9c6fd4c9ce28",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "XnJY1DXBZnFIWODa",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2032,
+        496
+      ],
+      "id": "cdeea74e-aad2-45dc-84d7-30c10dc79875",
+      "name": "Download file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "XnJY1DXBZnFIWODa",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        496
+      ],
+      "id": "a34e54dc-9c50-4f32-9c01-ad6c0ce69993",
+      "name": "Extract from File1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are a senior legal analyst. Your job is to read a legal document (full extracted text passed in) and return a single JSON object (no extra text) that populates the fields described below.\n\nInput variables (n8n):\n- Document text: {{$json[\"text\"]}}\n- DateReceived header: {{$node[\"Gmail Trigger\"].json[\"headers\"][\"date\"]}}\n\nInstructions:\n1. Read the document text and email metadata.\n2. Extract and return ONLY a single valid JSON object (no surrounding text, no code fences).\n3. Date formats: use YYYY-MM-DD (ISO). Convert the DateReceived header to this format.\n4. Summary: produce a concise ~200-word factual summary and key takeaways.\n5. KeyIssues: provide an array of the top 5 distinct legal issues / risk points.\n6. Deadline: calculate the next critical deadline based on filing date and jurisdiction mentioned in the document. If jurisdiction is not stated, assume \"Federal (US)\" and compute a conservative common procedural deadline: Answer/Response due 30 days after DateReceived. Also include a field \"DeadlineAssumption\" explaining any assumption used (this field may be used downstream).\n7. EmailSubject: short subject under 10 words.\n8. SummaryEmail: HTML-formatted email that combines the summary and key issues for internal distribution; include a line stating the file is saved to Google Drive.\n9. RawID: a short unique identifier (e.g., generate UUID-like string).\n10. Do not include any extra commentary, analysis, or explanations—only the JSON object described below.\n\nRequired JSON schema (exact keys and types):\n{\n  \"RawID\": \"string\",\n  \"DateReceived\": \"YYYY-MM-DD\",\n  \"Summary\": \"string (approx 200 words)\",\n  \"KeyIssues\": [\"Issue1\",\"Issue2\",\"Issue3\",\"Issue4\",\"Issue5\"],\n  \"Deadline\": \"YYYY-MM-DD\",\n  \"DeadlineAssumption\": \"string (explain assumptions used)\",\n  \"EmailSubject\": \"string (under 10 words)\",\n  \"SummaryEmail\": \"string (HTML)\"\n}\n\nIf the document lacks data needed to compute a deadline (e.g., no filing date or jurisdiction), make a best-effort estimate and state the assumption in DeadlineAssumption. If you must choose, assume \"Federal (US)\" and a 30-day response deadline.\n\nNow process the provided document text: {{$json[\"text\"]}} and the DateReceived header: {{$node[\"Gmail Trigger\"].json[\"headers\"][\"date\"]}}. Output only the single JSON object per the schema above.\n"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "textFormat": {
+            "textOptions": {
+              "type": "json_schema",
+              "schema": "={\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"RawID\",\n    \"DateReceived\",\n    \"Summary\",\n    \"KeyIssues\",\n    \"Deadline\",\n    \"DeadlineAssumption\",\n    \"EmailSubject\",\n    \"SummaryEmail\"\n  ],\n  \"properties\": {\n    \"RawID\": { \"type\": \"string\" },\n    \"DateReceived\": {\n      \"type\": \"string\",\n      \"pattern\": \"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\"\n    },\n    \"Summary\": { \"type\": \"string\" },\n    \"KeyIssues\": {\n      \"type\": \"array\",\n      \"minItems\": 5,\n      \"maxItems\": 5,\n      \"items\": { \"type\": \"string\" }\n    },\n    \"Deadline\": {\n      \"type\": \"string\",\n      \"pattern\": \"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\"\n    },\n    \"DeadlineAssumption\": { \"type\": \"string\" },\n    \"EmailSubject\": { \"type\": \"string\" },\n    \"SummaryEmail\": { \"type\": \"string\" }\n  }\n}\n",
+              "description": "=You are a senior legal analyst. Your job is to read a legal document (full extracted text passed in) and return a single JSON object that EXACTLY matches the JSON Schema provided in the node's response_format. Output ONLY the JSON object (no commentary, no explanation, no code fences).  Inputs: - Document text: {{$json[\"text\"]}} - DateReceived (use current date): {{$now.format(\"YYYY-MM-DD\")}}  Instructions: 1. Read the document text and DateReceived. 2. Convert DateReceived to YYYY-MM-DD. 3. Produce a concise ~200-word factual Summary of the document. 4. Identify the top 5 legal issues / risk points and return them in KeyIssues as an array of exactly five strings. If fewer than five issues exist, fill remaining entries with \"TBD\". 5. Calculate the next critical Deadline based on any filing date and jurisdiction in the document. If jurisdiction or filing date is missing, assume \"Federal (US)\" and compute a 30-day response deadline from DateReceived. 6. Provide a DeadlineAssumption string explaining any assumptions used. 7. Provide a short EmailSubject (under 10 words). 8. Produce SummaryEmail as an HTML-formatted email that includes the Summary and KeyIssues and ends with the sentence: \"The file has been saved to Google Drive.\" 9. Generate RawID as a UUID-like string. 10. The output must be valid JSON that conforms to the schema (the schema in the node requires additionalProperties = false).  STRICT REQUIREMENTS: - The model MUST return exactly the keys: RawID, DateReceived, Summary, KeyIssues, Deadline, DeadlineAssumption, EmailSubject, SummaryEmail. - KeyIssues must have exactly 5 string items. - If token limits threaten truncation, prioritize fields in this order: RawID, DateReceived, Summary, KeyIssues, Deadline, DeadlineAssumption, EmailSubject, SummaryEmail. - Do NOT output anything other than the single JSON object.  Now process the document text below and return only the JSON.  Document text starts here → {{$json[\"text\"]}}",
+              "strict": true
+            }
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        2448,
+        512
+      ],
+      "id": "75ba384e-c4df-498c-8b8d-8126719ec7eb",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "jkIiM510cl4o7671",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1FLYVRmaFT3LLky3HQSmnLhFcu2HAFX9R0Jj4_LmexsQ",
+          "mode": "list",
+          "cachedResultName": "Legal Summaries",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FLYVRmaFT3LLky3HQSmnLhFcu2HAFX9R0Jj4_LmexsQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FLYVRmaFT3LLky3HQSmnLhFcu2HAFX9R0Jj4_LmexsQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $json.output[0].content[0].text.DateReceived }}",
+            "Subject": "={{ $json.output[0].content[0].text.EmailSubject }}",
+            "Issue 1": "={{ $json.output[0].content[0].text.KeyIssues[0] }}",
+            "Issue 2": "={{ $json.output[0].content[0].text.KeyIssues[1] }}",
+            "Issue 3": "={{ $json.output[0].content[0].text.KeyIssues[2] }}",
+            "Issue 4": "={{ $json.output[0].content[0].text.KeyIssues[3] }}",
+            "Issue 5": "={{ $json.output[0].content[0].text.KeyIssues[4] }}",
+            "Deadline": "={{ $json.output[0].content[0].text.Deadline }}",
+            "Full Summery Output": "={{ $json.output[0].content[0].text.Summary }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Subject",
+              "displayName": "Subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Issue 1",
+              "displayName": "Issue 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Issue 2",
+              "displayName": "Issue 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Issue 3",
+              "displayName": "Issue 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Issue 4",
+              "displayName": "Issue 4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Issue 5",
+              "displayName": "Issue 5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Full Summery Output",
+              "displayName": "Full Summery Output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3008,
+        432
+      ],
+      "id": "321e3359-4c03-4f55-8645-d8ccc58d739d",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LcvmGkpMcwTrBKQh",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "rickh5054@gmail.com",
+        "subject": "={{ $json.output[0].content[0].text.EmailSubject }}",
+        "message": "={{ $json.output[0].content[0].text.Summary }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2864,
+        656
+      ],
+      "id": "1774b4b1-7f79-499b-a6fa-c917ee2c3b3c",
+      "name": "Send a message",
+      "webhookId": "11a85ed2-bbbc-435f-abfc-8a22bcb8c2be",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rpRLONudmGiSa18l",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "40c67c77-7d79-45a1-871b-17fc6e6965ff",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a42e26fe1cc66ab7e555f0393c1d5c50a17ad2b170cd64dc486602ed22679c28"
+  },
+  "id": "6um5lF4MGCLLaAaG",
+  "tags": []
+}
